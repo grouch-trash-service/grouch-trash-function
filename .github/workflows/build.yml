@@ -27,6 +27,9 @@ jobs:
       run: |
         pytest --cov-config=.coveragerc --cov=. tests/ --cov-report=xml --cov-fail-under=80
 
+    - name: Sam Build
+      run: sam build
+
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
@@ -45,3 +48,6 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
         args: --file=trash/requirements.txt -- --allow-missing
+
+    - name: Deploy Sam templates
+      run: sam deploy --no-fail-on-empty-changeset

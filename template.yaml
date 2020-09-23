@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  grouch-trash-function
+
+  Sample SAM Template for grouch-trash-function
+
+Resources:
+  TrashFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: TrashFunction
+      CodeUri: trash/
+      Handler: function.lambda_handler
+      Runtime: python3.7
+
+Outputs:
+  TrashFunction:
+    Description: "Trash Function ARN"
+    Value: !GetAtt TrashFunction.Arn
+    Export:
+      Name:
+        Fn::Sub: ${AWS::StackName}-TrashFunction
+  TrashFunctionIamRole:
+    Description: "Implicit IAM Role created for Trash function"
+    Value: !GetAtt TrashFunctionRole.Arn
