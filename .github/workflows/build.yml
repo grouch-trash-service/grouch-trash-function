@@ -44,4 +44,4 @@ jobs:
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        args: --file=auth/requirements.txt -- --allow-missing
+        args: --file=trash/requirements.txt -- --allow-missing
