@@ -23,6 +23,12 @@ class TestCase(unittest.TestCase):
         date_range = holiday.create_date_range(start_date, 2)
         self.assertEqual(expected_date_range, date_range)
 
+    def test_get_holiday(self):
+        number_of_days = 7
+        start_date = datetime.date(2019, 12, 31)
+        date_range = holiday.create_date_range(start_date, number_of_days)
+        new_years_day = holiday.get_holiday(date_range)
+        self.assertEqual("New Year's Day", new_years_day)
 
 if __name__ == '__main__':
     unittest.main()
