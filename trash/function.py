@@ -2,6 +2,10 @@
 lambda function for getting which day of the week trash pickup is
 """
 
+from dateutil import parser
+
+import holiday
+
 
 def lambda_handler(event, context) -> dict:
     """
@@ -12,6 +16,14 @@ def lambda_handler(event, context) -> dict:
     """
     print(event)
     print(context)
-    return {
-        'default': 'Tuesday'
-    }
+    day_range = 7
+    start_date = parser.parse(event['date'])
+    date_range = holiday.create_date_range(start_date, day_range)
+
+    if holiday.contains_holiday(date_range):
+        response = {'holiday': holiday.get_holiday(date_range)}
+    else:
+        response = {'default': 'Tuesday'}
+    print(response)
+
+    return response

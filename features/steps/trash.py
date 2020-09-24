@@ -12,6 +12,15 @@ def given_no_holiday(context):
     context.date = '2020-09-22'
 
 
+@given("a (?P<date>.+) with a holiday during the week")
+def holiday_during_the_week(context, date):
+    """
+    :type context: behave.runner.Context
+    :type date: str
+    """
+    context.date = date
+
+
 @when("getting the trash day for that week")
 def get_trash_day(context):
     env = context.config.userdata.get('local', 'false')
@@ -41,3 +50,14 @@ def default_is_returned(context):
     payload = context.response['Payload']
     response_body = json.loads(payload._raw_stream.data)
     assert response_body == {'default': 'Tuesday'}
+
+
+@then("the (?P<holiday>.+) trash schedule is returned")
+def step_impl(context, holiday):
+    """
+    :type context: behave.runner.Context
+    :type holiday: str
+    """
+    payload = context.response['Payload']
+    response_body = json.loads(payload._raw_stream.data)
+    assert response_body['holiday'] == holiday

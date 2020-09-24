@@ -1,6 +1,6 @@
 import unittest
 import datetime
-import holiday
+import trash.holiday as holiday
 
 
 class TestCase(unittest.TestCase):

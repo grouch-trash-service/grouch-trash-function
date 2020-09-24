@@ -32,7 +32,7 @@ jobs:
 
     - name: Test
       run: |
-        pytest --cov-config=.coveragerc --cov=. tests/ --cov-report=xml --cov-fail-under=80
+        PYTHONPATH=trash pytest --cov-config=.coveragerc --cov=. tests/ --cov-report=xml --cov-fail-under=80
 
     - name: Sam Build
       run: sam build
