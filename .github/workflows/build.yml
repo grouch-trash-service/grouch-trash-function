@@ -35,7 +35,7 @@ jobs:
         PYTHONPATH=trash pytest --cov-config=.coveragerc --cov=. tests/ --cov-report=xml --cov-fail-under=80
 
     - name: Sam Build
-      run: sam build
+      run: sam build --debug
 
     - name: Run local Cucumber Tests
       run: |
