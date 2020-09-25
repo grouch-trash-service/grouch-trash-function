@@ -20,6 +20,7 @@ def contains_holiday(dates: list) -> bool:
             return True
     return False
 
+
 def get_holiday(dates: list) -> bool:
     """
     gets the first holiday in a list of dates
@@ -30,6 +31,7 @@ def get_holiday(dates: list) -> bool:
         if date in us_holidays:
             return us_holidays.get(date)
     return None
+
 
 def create_date_range(start_date: datetime.date, number_of_days: int) -> list:
     """

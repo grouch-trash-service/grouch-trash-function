@@ -5,3 +5,4 @@ pylint
 behave
 boto3
 holidays
+aws-requests-auth
