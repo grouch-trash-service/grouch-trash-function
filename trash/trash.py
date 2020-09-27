@@ -2,6 +2,8 @@
 Module for calculating next trash day
 """
 import datetime
+import calendar
+
 from dateutil import parser
 
 import holiday
@@ -10,7 +12,7 @@ TUESDAY = 1
 TRASH_DAY = TUESDAY
 
 
-def next_trash_day(date: str) -> str:
+def next_regular_trash_day(date: str) -> str:
     """
     Gets the next trash day for a given date
     :param date: data to calculate trash day for
@@ -41,3 +43,22 @@ def get_weekdays(date: str) -> list:
     first_day_of_week = parsed_date - datetime.timedelta(days=day_of_week)
 
     return holiday.create_date_range(first_day_of_week, 7)
+
+
+def next_trash_day(date: str, holidays: list) -> dict:
+    """
+    gets the next trash day taking holidays into consideration
+    :param date: date to calculate next trash day for
+    :param holidays: list of holidays
+    :return: dict containing either the default trash day or route delay information based off holiday.
+    """
+    next_regular = next_regular_trash_day(date)
+    weekdays = get_weekdays(next_regular)
+    if holiday.contains_holiday(weekdays):
+        holiday_name = holiday.get_holiday(weekdays)
+        delay = list(filter(lambda holiday_delays: holiday_delays['name'] == holiday_name, holidays))[0]['routeDelays']
+        trash_day = {'holiday': holiday_name, 'delay': delay}
+    else:
+        trash_day = {'default': calendar.day_name[TRASH_DAY]}
+
+    return trash_day
