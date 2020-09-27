@@ -2,9 +2,11 @@
 lambda function for getting which day of the week trash pickup is
 """
 
-from dateutil import parser
+import trash_day as trash
+from schedule import TrashScheduleService
 
-import holiday
+trash_schedule_service = TrashScheduleService(
+    'https://dp8mqqk471.execute-api.us-east-1.amazonaws.com/Prod/v1/holidays')
 
 
 def lambda_handler(event, context) -> dict:
@@ -16,14 +18,11 @@ def lambda_handler(event, context) -> dict:
     """
     print(event)
     print(context)
-    day_range = 7
-    start_date = parser.parse(event['date'])
-    date_range = holiday.create_date_range(start_date, day_range)
 
-    if holiday.contains_holiday(date_range):
-        response = {'holiday': holiday.get_holiday(date_range)}
-    else:
-        response = {'default': 'Tuesday'}
-    print(response)
+    date = event['date']
 
-    return response
+    holiday_schedule = trash_schedule_service.get_schedule()
+    print(holiday_schedule)
+    trash_day = trash.next_trash_day(date, holiday_schedule)
+    print(trash_day)
+    return trash_day

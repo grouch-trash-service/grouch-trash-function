@@ -1,17 +1,26 @@
 import unittest
+from unittest.mock import MagicMock
+
+from schedule import TrashScheduleService
 from trash import function
 
 
 class Test(unittest.TestCase):
-    def test_default_lambda_handler(self):
-        event = {'date': '2020-09-09'}
-        result = function.lambda_handler(event, None)
-        self.assertEqual({'default': 'Tuesday'}, result)
+    holidays = [{
+        'name': 'Christmas Day',
+        'routeDelays': 'Delays!!'
+    }]
 
-    def test_holiday_lambda_handler(self):
-        event = {'date': '2020-01-01'}
+    def test_lambda_handler(self):
+        trash_schedule_service = TrashScheduleService(
+            '/v1/holidays')
+        trash_schedule_service.get_schedule = MagicMock(return_value=Test.holidays)
+
+        function.trash_schedule_service = trash_schedule_service
+
+        event = {'date': '2020-12-21'}
         result = function.lambda_handler(event, None)
-        self.assertEqual({'holiday': "New Year's Day"}, result)
+        self.assertEqual({'holiday': 'Christmas Day', 'delay': 'Delays!!'}, result)
 
 
 if __name__ == '__main__':

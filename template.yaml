@@ -13,6 +13,7 @@ Resources:
       CodeUri: trash/
       Handler: function.lambda_handler
       Runtime: python3.7
+      Timeout: 120
 
 Outputs:
   TrashFunction:

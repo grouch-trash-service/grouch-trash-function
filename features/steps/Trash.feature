@@ -13,7 +13,7 @@ Feature: Get trash day
 
     Examples:
     | date       | holiday        |
-    | 2020-01-01 | New Year's Day |
+    | 2020-12-28 | New Year's Day |
     | 2020-12-20 | Christmas Day  |
     | 2020-09-07 | Labor Day      |
-    | 2020-11-25 | Thanksgiving   |
+    | 2020-11-24 | Thanksgiving   |

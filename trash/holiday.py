@@ -21,7 +21,7 @@ def contains_holiday(dates: list) -> bool:
     return False
 
 
-def get_holiday(dates: list) -> bool:
+def get_holiday(dates: list) -> str:
     """
     gets the first holiday in a list of dates
     :param dates: list of dates containing potential holidays

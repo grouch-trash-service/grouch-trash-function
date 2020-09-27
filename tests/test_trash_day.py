@@ -2,7 +2,7 @@ from dateutil import parser
 
 import unittest
 import holiday
-import trash.trash as trash
+import trash.trash_day as trash
 
 
 class TestCase(unittest.TestCase):

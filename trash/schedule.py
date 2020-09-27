@@ -34,7 +34,7 @@ class TrashScheduleService:
                                aws_service='execute-api')
 
     def _fetch_schedule(self, auth: AWSRequestsAuth) -> requests.Response:
-        return requests.get(self.url, auth)
+        return requests.get(self.url, auth=auth)
 
     def get_schedule(self) -> list:
         """
