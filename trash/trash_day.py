@@ -57,8 +57,8 @@ def next_trash_day(date: str, holidays: list) -> dict:
     if holiday.contains_holiday(weekdays):
         holiday_name = holiday.get_holiday(weekdays)
         delay = list(filter(lambda holiday_delays: holiday_delays['name'] == holiday_name, holidays))[0]['routeDelays']
-        trash_day = {'holiday': holiday_name, 'delay': delay}
+        trash_day = {'type': 'holiday', 'holiday': holiday_name, 'schedule': delay}
     else:
-        trash_day = {'default': calendar.day_name[TRASH_DAY]}
+        trash_day = {'type': 'default', 'schedule': calendar.day_name[TRASH_DAY]}
 
     return trash_day

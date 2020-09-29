@@ -20,7 +20,7 @@ class Test(unittest.TestCase):
 
         event = {'date': '2020-12-21'}
         result = function.lambda_handler(event, None)
-        self.assertEqual({'holiday': 'Christmas Day', 'delay': 'Delays!!'}, result)
+        self.assertEqual({'type': 'holiday', 'holiday': 'Christmas Day', 'schedule': 'Delays!!'}, result)
 
 
 if __name__ == '__main__':

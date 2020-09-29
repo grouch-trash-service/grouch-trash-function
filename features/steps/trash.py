@@ -49,7 +49,7 @@ def get_trash_day(context):
 def default_is_returned(context):
     payload = context.response['Payload']
     response_body = json.loads(payload._raw_stream.data)
-    assert response_body == {'default': 'Tuesday'}
+    assert response_body == {'type': 'default', 'schedule': 'Tuesday'}
 
 
 @then("the (?P<holiday>.+) trash schedule is returned")

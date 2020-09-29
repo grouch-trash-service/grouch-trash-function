@@ -97,13 +97,13 @@ class TestCase(unittest.TestCase):
 
     def test_get_trash_day_no_holiday(self):
         day = '2020-10-04'
-        expected_day = {'default': 'Tuesday'}
+        expected_day = {'type': 'default', 'schedule': 'Tuesday'}
         trash_day = trash.next_trash_day(day, TestCase.holidays)
         self.assertEqual(expected_day,trash_day)
 
     def test_get_trash_day_holiday(self):
         day = '2020-12-21'
-        expected_day = {'holiday': 'Christmas Day', 'delay': TestCase.holidays[0]['routeDelays']}
+        expected_day = {'type': 'holiday', 'holiday': 'Christmas Day', 'schedule': TestCase.holidays[0]['routeDelays']}
         trash_day = trash.next_trash_day(day, TestCase.holidays)
         self.assertEqual(expected_day,trash_day)
 
