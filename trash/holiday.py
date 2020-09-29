@@ -3,12 +3,14 @@ Module for Holiday operations
 """
 import datetime
 
+from typing import List
+
 import holidays
 
 us_holidays = holidays.UnitedStates()
 
 
-def contains_holiday(dates: list) -> bool:
+def contains_holiday(dates: List[datetime.date]) -> bool:
     """
     determines if a date range contains a holiday
     :param dates: list of dates
@@ -21,7 +23,7 @@ def contains_holiday(dates: list) -> bool:
     return False
 
 
-def get_holiday(dates: list) -> str:
+def get_holiday(dates: List[datetime.date]) -> str:
     """
     gets the first holiday in a list of dates
     :param dates: list of dates containing potential holidays
@@ -33,7 +35,7 @@ def get_holiday(dates: list) -> str:
     return None
 
 
-def create_date_range(start_date: datetime.date, number_of_days: int) -> list:
+def create_date_range(start_date: datetime.date, number_of_days: int) -> List[datetime.date]:
     """
     creates a date range from a start date and number of days
     :param start_date: day to start the range

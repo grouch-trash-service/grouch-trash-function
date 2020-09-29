@@ -4,6 +4,8 @@ Module for fetching trash holiday schedule
 import logging
 
 from urllib.parse import urlparse
+from typing import List
+
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 from botocore.credentials import Credentials
 
@@ -16,7 +18,7 @@ class TrashScheduleService:
     TrashScheduleService is a service class that fetches the trash holiday schedule
     """
 
-    def __init__(self, url):
+    def __init__(self, url: str):
         self.url = url
 
     @staticmethod
@@ -41,7 +43,7 @@ class TrashScheduleService:
         logging.info('response=%s', str({'statusCode': response.status_code, 'text': response.text}))
         return response
 
-    def get_schedule(self) -> list:
+    def get_schedule(self) -> List[dict]:
         """
         fetches the trash holiday schedule from trash holiday service
         :return: a list of holidays and delay information
