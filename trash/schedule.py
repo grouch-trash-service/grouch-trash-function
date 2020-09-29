@@ -29,6 +29,7 @@ class TrashScheduleService:
         credentials = TrashScheduleService.__get_credentials()
         return AWSRequestsAuth(aws_access_key=credentials.access_key,
                                aws_secret_access_key=credentials.secret_key,
+                               aws_token=credentials.token,
                                aws_host=host,
                                aws_region=boto3.Session().region_name,
                                aws_service='execute-api')
