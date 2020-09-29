@@ -1,6 +1,7 @@
 """
 Module for fetching trash holiday schedule
 """
+import logging
 
 from urllib.parse import urlparse
 from aws_requests_auth.aws_auth import AWSRequestsAuth
@@ -35,7 +36,10 @@ class TrashScheduleService:
                                aws_service='execute-api')
 
     def _fetch_schedule(self, auth: AWSRequestsAuth) -> requests.Response:
-        return requests.get(self.url, auth=auth)
+        logging.info('starting request to url=%s', self.url)
+        response = requests.get(self.url, auth=auth)
+        logging.info('response=%s', str({'statusCode': response.status_code, 'text': response.text}))
+        return response
 
     def get_schedule(self) -> list:
         """
