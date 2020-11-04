@@ -1,6 +1,7 @@
 """
 lambda function for getting which day of the week trash pickup is
 """
+import os
 import logging
 import logging.config
 import configparser
@@ -8,10 +9,11 @@ import trash_day as trash
 from schedule import TrashScheduleService
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config_file = os.path.join(os.path.dirname(__file__), 'config.ini')
+config.read(config_file)
 trash_schedule_service = TrashScheduleService(config['DEFAULT']['TrashScheduleServiceUrl'])
 
-logging.config.fileConfig('config.ini')
+logging.config.fileConfig(config_file)
 
 
 def lambda_handler(event, context) -> dict:
