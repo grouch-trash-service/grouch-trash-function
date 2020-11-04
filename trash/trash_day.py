@@ -3,13 +3,19 @@ Module for calculating next trash day
 """
 import datetime
 import calendar
+import configparser
+import os
 
 from dateutil import parser
 
 import holiday
 
-TUESDAY = 1
-TRASH_DAY = TUESDAY
+
+config = configparser.ConfigParser()
+config_file = os.path.join(os.path.dirname(__file__), 'config.ini')
+config.read(config_file)
+
+TRASH_DAY = int(config['DEFAULT']['TrashDay'])
 
 
 def next_regular_trash_day(date: str) -> str:
