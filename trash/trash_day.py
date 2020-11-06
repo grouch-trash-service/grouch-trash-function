@@ -60,11 +60,15 @@ def next_trash_day(date: str, holidays: list) -> dict:
     """
     next_regular = next_regular_trash_day(date)
     weekdays = get_weekdays(next_regular)
+    default_trash_day = {'type': 'default', 'schedule': calendar.day_name[TRASH_DAY]}
     if holiday.contains_holiday(weekdays):
         holiday_name = holiday.get_holiday(weekdays)
-        delay = list(filter(lambda holiday_delays: holiday_delays['name'] == holiday_name, holidays))[0]['routeDelays']
-        trash_day = {'type': 'holiday', 'holiday': holiday_name, 'schedule': delay}
+        find_holiday = list(filter(lambda holiday_delays: holiday_delays['name'] == holiday_name, holidays))
+        if len(find_holiday) > 0:
+            trash_day = {'type': 'holiday', 'holiday': holiday_name, 'schedule': find_holiday[0]['routeDelays']}
+        else:
+            trash_day = default_trash_day
     else:
-        trash_day = {'type': 'default', 'schedule': calendar.day_name[TRASH_DAY]}
+        trash_day = default_trash_day
 
     return trash_day

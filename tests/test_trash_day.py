@@ -107,6 +107,12 @@ class TestCase(unittest.TestCase):
         trash_day = trash.next_trash_day(day, TestCase.holidays)
         self.assertEqual(expected_day,trash_day)
 
+    def test_holiday_but_not_trash_holiday(self):
+        veterans_day = '2020-11-05'
+        trash_day = trash.next_trash_day(veterans_day, TestCase.holidays)
+        expected_day = {'type': 'default', 'schedule': 'Tuesday'}
+        self.assertEqual(expected_day, trash_day)
+
 
 if __name__ == '__main__':
     unittest.main()
